@@ -4,7 +4,7 @@ angular
 
 function homeController() {
 	var vm = this;
-
+	
 	vm.phrase = "Hello_World!!!";
 }
 

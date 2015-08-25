@@ -5,7 +5,8 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	cssmin = require('gulp-minify-css'),
 	concat = require('gulp-concat-css'),
-	useref = require('gulp-useref');
+	useref = require('gulp-useref'),
+	jshint = require('gulp-jshint');
 
 gulp.task("build:styles", function () {
 	gulp.src("src/assets/scss/**/*.scss")
@@ -28,7 +29,13 @@ gulp.task("build:app", function () {
         	   .pipe(connect.reload());
 });
 
-gulp.task("server:run", ["build:styles","build:app","watch"], function () {
+gulp.task('lint', function() {
+  return gulp.src('src/app/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+gulp.task("server:run", ["build:styles","build:app","watch", "lint"], function () {
 
 	connect.server({
 		root: "build",
@@ -39,7 +46,7 @@ gulp.task("server:run", ["build:styles","build:app","watch"], function () {
 gulp.task("watch", function () {
 	gulp.watch("src/index.html", ["build:app"]);
 	gulp.watch("src/assets/scss/**/*.scss",["build:styles","build:app"]);
-	gulp.watch("src/app/**/*.js",["build:app"]);
+	gulp.watch("src/app/**/*.js",["lint", "build:app"]);
 });
 
 
