@@ -42,4 +42,5 @@ gulp.task("watch", function () {
 	gulp.watch("src/app/**/*.js",["build:app"]);
 });
 
+gulp.task("default", ["server:run"]);
 
