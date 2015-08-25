@@ -49,4 +49,5 @@ gulp.task("watch", function () {
 	gulp.watch("src/app/**/*.js",["lint", "build:app"]);
 });
 
+gulp.task("default", ["server:run"]);
 
