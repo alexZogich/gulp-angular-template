@@ -8,7 +8,7 @@ var gulp = require('gulp'),
 	useref = require('gulp-useref');
 
 gulp.task("build:styles", function () {
-	gulp.src("src/assets/sass/**/*.sass")
+	gulp.src("src/assets/scss/**/*.scss")
 		.pipe(sass())
         .pipe(concat("all.min.css"))
         .pipe(cssmin())
@@ -38,7 +38,7 @@ gulp.task("server:run", ["build:styles","build:app","watch"], function () {
 
 gulp.task("watch", function () {
 	gulp.watch("src/index.html", ["build:app"]);
-	gulp.watch("src/assets/sass/**/*.sass",["build:styles","build:app"]);
+	gulp.watch("src/assets/scss/**/*.scss",["build:styles","build:app"]);
 	gulp.watch("src/app/**/*.js",["build:app"]);
 });
 
